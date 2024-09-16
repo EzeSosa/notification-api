@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: notification-api
+
+server:
+  port: 9090
+
+consumers:
+  allowed-origins: http://localhost:5173
