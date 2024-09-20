@@ -27,17 +27,10 @@ class SecurityConfiguration {
             .build()
 
     @Bean
-    fun corsConfigurationSource(): CorsConfigurationSource {
-        val corsConfiguration = CorsConfiguration().apply {
-            allowedOrigins = listOf("http://localhost:5173")
-            allowedMethods = listOf("*")
-            allowCredentials = true
+    fun corsConfigurationSource(): CorsConfigurationSource =
+        UrlBasedCorsConfigurationSource().apply {
+            registerCorsConfiguration("/**", getCorsConfiguration())
         }
-
-        val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", corsConfiguration)
-        return source
-    }
 
     @Bean
     fun userDetailsService(): UserDetailsService =
@@ -54,4 +47,11 @@ class SecurityConfiguration {
                 .roles("USER")
                 .build()
         )
+
+    private fun getCorsConfiguration(): CorsConfiguration =
+        CorsConfiguration().apply {
+            allowedOrigins = listOf("http://localhost:5173")
+            allowedMethods = listOf("*")
+            allowCredentials = true
+        }
 }
