@@ -1,8 +1,8 @@
 package com._up.notification_api.services
 
-import com._up.notification_api.data.INotificationRepository
+import com._up.notification_api.data.persistence.INotificationRepository
 import com._up.notification_api.utils.Message
-import com._up.notification_api.data.Notification
+import com._up.notification_api.data.model.Notification
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.messaging.simp.SimpMessagingTemplate

@@ -1,4 +1,4 @@
-package com._up.notification_api.data
+package com._up.notification_api.data.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
