@@ -21,6 +21,4 @@ class NotificationService(
             messagingTemplate.convertAndSend("/admins", it)
             notificationRepository.save(it)
         }
-
-    private fun Message.buildNotification() = Notification(message)
 }
