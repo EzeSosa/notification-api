@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS log
+(
+    id        VARCHAR(36) DEFAULT (UUID()),
+    issued_at TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
+    endpoint  VARCHAR(50) NOT NULL,
+    browser   VARCHAR(25) NOT NULL,
+    PRIMARY KEY (id)
+);
