@@ -20,18 +20,20 @@ class LogDAOTest {
     @Autowired
     private lateinit var logDAO: LogDAO
 
+    companion object {
+        const val SQL = "INSERT INTO log (id, endpoint, browser) VALUES (?, ?, ?)"
+    }
+
     @Test
     fun `should return all logs`() {
 
-        val sql = "INSERT INTO log (id, endpoint, browser) VALUES (?, ?, ?)"
-
         jdbcTemplate.update(
-            sql,
+            SQL,
             UUID.randomUUID().toString(), "/v1/demo", "Firefox",
         )
 
         jdbcTemplate.update(
-            sql,
+            SQL,
             UUID.randomUUID().toString(), "/v1/hello", "Chrome",
         )
 
@@ -44,6 +46,23 @@ class LogDAOTest {
 
         assertEquals("Firefox", logs[0].browser)
         assertEquals("Chrome", logs[1].browser)
+    }
+
+    @Test
+    fun `should return one by id`() {
+        val logId = UUID.randomUUID()
+
+        jdbcTemplate.update(
+            SQL,
+            logId.toString(), "/v1/hey", "Edge"
+        )
+
+        val log = logDAO.getOne(logId)
+
+        assertNotNull(log)
+
+        assertEquals("Edge", log.browser)
+        assertEquals("/v1/hey", log.endpoint)
     }
 
 }
